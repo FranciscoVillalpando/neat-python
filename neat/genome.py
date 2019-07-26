@@ -113,6 +113,18 @@ class DefaultGenomeConfig(object):
 
         new_id = next(self.node_indexer)
 
+        if new_id in node_dict:
+            print("Got new_id issue, executing workaround...")
+            print("debug info for issue:")
+            print(new_id)
+            print(node_dict)
+            print("dict1:" + str(self.__dict__))
+
+            new_id = max(node_dict.keys()) + 1
+            self.node_indexer = count(max(list(iterkeys(node_dict))) + 1)
+
+            print("dict2:" +str(self.__dict__))
+
         assert new_id not in node_dict
 
         return new_id
